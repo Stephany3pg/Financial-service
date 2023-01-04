@@ -8,7 +8,22 @@ var indexRouter = require('./routes/index');
 var usersRouter = require('./routes/users');
 
 var app = express();
+var mongoose = require("mongoose");
 
+mongoose.connect(
+  process.env.MONGODB_URI || "mongodb://localhost/CRUD",
+  {
+    useNewUrlParser: true,
+    useUnifiedTopology: true,
+  },
+  (err) => {
+    if (err) {
+      console.log(err);
+    } else {
+      console.log("Connected to MongoDB");
+    }
+  }
+);
 // view engine setup
 app.set('views', path.join(__dirname, 'views'));
 app.set('view engine', 'jade');
@@ -23,7 +38,7 @@ app.use('/', indexRouter);
 // app.use('/users', usersRouter);
 
 // port
- const port = process.env.PORT || 5500;
+ var port = process.env.PORT || 5500;
 
 app.listen(port, () => console.log(`Listening on Port: ${port}`));
 // catch 404 and forward to error handler
