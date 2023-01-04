@@ -1,9 +1,17 @@
 var express = require('express');
 var router = express.Router();
 
-/* GET home page. */
-router.get('/', function(req, res, next) {
-  res.render('index', { title: 'Express' });
+
+router.get(`/app/categorias`, function (req, res) {
+	res.status(200).json({msg: `Get Categorias`});
+});
+
+router.post(`/app/gastos/registrar`, function (req, res) {
+	res.status(200).json({msg: `Post Registrar`});
+});
+
+router.delete(`/app/gastos/eliminar`, function (req, res) {
+	res.status(200).json({msg: `Delete gastos`});
 });
 
 module.exports = router;
